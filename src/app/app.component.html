@@ -13,37 +13,40 @@
       </a>
     </li>
   </ul>
-  <form action="#" style="display: flex; flex-direction: column;" (submit)="save($event)">
+  <form #formCadastro="ngForm" action="#" style="display: flex; flex-direction: column;"
+    (ngSubmit)="save($event, formCadastro)">
     <div class="mdl-textfield mdl-js-textfield">
-      <input (input)="getValue($event.target.value, 'nome')" class="mdl-textfield__input" type="text" id="nome">
+      <input required [(ngModel)]="campos.nome" #nome="ngModel" name="nome" class="mdl-textfield__input" type="text"
+        id="nome">
       <label class="mdl-textfield__label" for="nome">Nome</label>
-      {{campos.nome}}
+      <span *ngIf="nome.touched && nome.invalid" class="mdl-textfield__error">Este campo é obrigatório</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield">
-      <input (input)="getValue($event.target.value, 'raca')" class="mdl-textfield__input" type="text" id="raca">
+      <input required [(ngModel)]="campos.raca" #raca="ngModel" name="raca" class="mdl-textfield__input" type="text"
+        id="raca">
       <label class="mdl-textfield__label" for="raca">Raça: Anão, Humano, Orc…</label>
-      {{campos.raca}}
+      <span *ngIf="raca.touched && raca.invalid" class="mdl-textfield__error">Este campo é obrigatório</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield">
-      <input (input)="getValue($event.target.value, 'classe')" class="mdl-textfield__input" type="text" id="classe">
+      <input required [(ngModel)]="campos.classe" #classe="ngModel" name="classe" class="mdl-textfield__input"
+        type="text" id="classe">
       <label class="mdl-textfield__label" for="classe">Classe: Bárbaro, Mago, Monge, Paladino…</label>
-      {{campos.classe}}
+      <span *ngIf="classe.touched && classe.invalid" class="mdl-textfield__error">Este campo é obrigatório</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield">
-      <input (input)="getValue($event.target.value, 'numero')" class="mdl-textfield__input" type="text"
-        pattern="-?[0-9]*(\.[0-9]+)?" id="numero">
+      <input required [(ngModel)]="campos.numero" #numeros="ngModel" name="numero" class="mdl-textfield__input"
+        type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="numero">
       <label class="mdl-textfield__label" for="numero">Number...</label>
-      <span class="mdl-textfield__error">Input is not a number!</span>
-      {{campos.numero}}
+      <span *ngIf="numeros.touched && numeros.invalid" class="mdl-textfield__error">Input is not a number!</span>
     </div>
     <div class="mdl-textfield mdl-js-textfield">
-      <input (input)="getValue($event.target.value, 'telefone')" class="mdl-textfield__input" type="text" id="telefone">
+      <input required [(ngModel)]="campos.telefone" #telefone="ngModel" name="telefone" class="mdl-textfield__input"
+        type="text" id="telefone">
       <label class="mdl-textfield__label" for="telefone">Telefone do jogador</label>
-      {{campos.telefone}}
+      <span *ngIf="telefone.touched && telefone.invalid" class="mdl-textfield__error">Este campo é obrigatório</span>
     </div>
     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
       Salvar
     </button>
   </form>
-  <!-- Numeric Textfield -->
 </app-header>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Form, FormControl, FormGroup, NgForm } from '@angular/forms';
 
 interface Personas {
   classe: string;
@@ -12,8 +13,6 @@ interface Personas {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Click';
-  email = 'elucasfelinto@gmail.com';
   campos = {
     nome: '',
     raca: '',
@@ -70,7 +69,12 @@ export class AppComponent {
     this.campos[campo] = value;
   }
 
-  save(event) {
-    event.preventDefault();
+  save(event, form: NgForm) {
+    if (form.invalid) {
+      form.control.markAllAsTouched();
+    } else {
+      localStorage.setItem('persona', JSON.stringify(this.campos));
+      form.reset();
+    }
   }
 }
